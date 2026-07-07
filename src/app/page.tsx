@@ -1,129 +1,86 @@
-import { Search, Plus } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
+
+const latestPosts = [
+  {
+    slug: "20-free-halloween-svg-files",
+    title: "20 Free Halloween SVG Files",
+    image: "https://images.unsplash.com/photo-1509557965875-b88c97052f0e?w=600&h=400&fit=crop",
+    category: "SVG Files",
+  },
+  {
+    slug: "best-floral-fonts-2026",
+    title: "Best Floral Fonts 2026",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop",
+    category: "Fonts",
+  },
+  {
+    slug: "cute-coloring-pages-for-kids",
+    title: "Cute Coloring Pages for Kids",
+    image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&h=400&fit=crop",
+    category: "Coloring Pages",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-slate-50 py-8">
-      <div className="max-w-[70%] mx-auto px-8">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-8 relative pl-40">
-          <div className="absolute left-0 top-1/2 -translate-y-1/2">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">C</span>
-              </div>
-              <span className="text-xl font-bold text-slate-800">CraftFlow</span>
-            </div>
-          </div>
-          <h1 className="text-2xl font-normal text-slate-800">
-            Auftragsvergleich
+    <div className="min-h-screen bg-white">
+      {/* Hero */}
+      <section className="py-20 px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6">
+            CraftFlow
           </h1>
-          <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-blue-700 transition-colors">
-            <Plus size={20} />
-            Neues Projekt anlegen
-          </button>
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+            Discover the best free fonts, SVG files, coloring pages and design
+            resources.
+          </p>
         </div>
+      </section>
 
-        {/* Filters */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-8">
-          {/* Search */}
-          <div className="flex-1 relative">
-            <Search
-              size={20}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
-            />
-            <input
-              type="text"
-              placeholder="Aufträge durchsuchen..."
-              className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
+      {/* Latest Posts */}
+      <section className="py-16 px-8 bg-slate-50">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-slate-900 mb-10">
+            Latest Posts
+          </h2>
 
-          {/* Dokumente dropdown */}
-          <div className="flex-1">
-            <label className="block text-xs text-slate-500 mb-1 ml-1">
-              Dokumente
-            </label>
-            <div className="relative">
-              <select className="w-full px-4 py-3 border border-slate-300 rounded-lg appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                <option value="all">Alle</option>
-                <option value="pdf">PDF</option>
-                <option value="doc">DOC</option>
-              </select>
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                <svg
-                  className="w-5 h-5 text-slate-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {latestPosts.map((post) => (
+              <Link
+                key={post.slug}
+                href={`/post/${post.slug}`}
+                className="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300"
+              >
+                <div className="relative h-56">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                </svg>
-              </div>
-            </div>
-          </div>
-
-          {/* Analyse dropdown */}
-          <div className="flex-1">
-            <label className="block text-xs text-slate-500 mb-1 ml-1">
-              Analyse
-            </label>
-            <div className="relative">
-              <select className="w-full px-4 py-3 border border-slate-300 rounded-lg appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                <option value="all">Alle</option>
-                <option value="completed">Abgeschlossen</option>
-                <option value="pending">Ausstehend</option>
-              </select>
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                <svg
-                  className="w-5 h-5 text-slate-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </div>
-            </div>
+                  <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-xs font-medium text-slate-700 px-3 py-1 rounded-full">
+                    {post.category}
+                  </span>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-slate-900 group-hover:text-blue-600 transition-colors">
+                    {post.title}
+                  </h3>
+                  <div className="flex items-center gap-2 mt-4 text-sm text-blue-600 font-medium">
+                    Read more
+                    <ArrowRight
+                      size={16}
+                      className="group-hover:translate-x-1 transition-transform"
+                    />
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
-
-        {/* Content */}
-        <div className="flex flex-col gap-4">
-          {/* Empty state / Loading */}
-          <div className="text-center py-16">
-            <div className="inline-block text-blue-600 animate-spin mb-4">
-              <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none">
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  className="opacity-25"
-                />
-                <path
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-                  fill="currentColor"
-                  className="opacity-75"
-                />
-              </svg>
-            </div>
-            <h6 className="text-lg font-medium text-slate-500">
-              Lade Aufträge...
-            </h6>
-          </div>
-        </div>
-      </div>
+      </section>
     </div>
   );
 }
