@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabase-admin";
 
 
 export async function POST(request: Request) {
@@ -31,7 +31,7 @@ export async function POST(request: Request) {
     } = body;
 
 
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from("posts")
       .insert({
         slug,
