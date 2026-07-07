@@ -15,6 +15,7 @@ export async function generateMetadata({ params }: Props) {
     .from("posts")
     .select("*")
     .eq("slug", slug)
+    .eq("status", "published")
     .single();
 
   return {
@@ -33,6 +34,7 @@ export default async function PostPage({ params }: Props) {
     .from("posts")
     .select("*")
     .eq("slug", slug)
+    .eq("status", "published")
     .single();
 
   if (error || !post) {

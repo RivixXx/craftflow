@@ -24,10 +24,15 @@ export async function POST(request: Request) {
       excerpt,
       content,
       image,
+      image_prompt,
       category,
       affiliate,
+      status,
+      views,
+      clicks,
       pinterest_title,
-      pinterest_description
+      pinterest_description,
+      pinterest_url
     } = body;
 
 
@@ -39,10 +44,15 @@ export async function POST(request: Request) {
         excerpt,
         content,
         image,
+        image_prompt: image_prompt || null,
         category,
         affiliate,
+        status: status || "draft",
+        views: views || 0,
+        clicks: clicks || 0,
         pinterest_title,
-        pinterest_description
+        pinterest_description,
+        pinterest_url: pinterest_url || null
       })
       .select()
       .single();

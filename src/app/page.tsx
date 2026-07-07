@@ -6,6 +6,7 @@ export default async function Home() {
   const { data: posts, error } = await supabase
     .from("posts")
     .select("*")
+    .eq("status", "published")
     .order("created_at", {
       ascending: false
     });
