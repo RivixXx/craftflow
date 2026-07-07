@@ -1,15 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fffbf5;
+  --foreground: #1a1a2e;
+  --primary: #e63946;
+  --primary-hover: #c1121f;
+  --accent: #457b9d;
+  --accent-light: #a8dadc;
+  --warm: #f4a261;
+  --warm-light: #fce4b8;
+  --green: #2a9d8f;
+  --purple: #7b2cbf;
+  --pink: #ff6b9d;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 body {
@@ -18,12 +26,39 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Craft-style decorative elements */
+.craft-dots {
+  background-image: radial-gradient(circle, #e63946 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.craft-wave {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%23f4a261' fill-opacity='0.15' d='M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,53.3C672,43,768,21,864,16C960,11,1056,21,1152,32C1248,43,1344,53,1392,58.7L1440,64L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z'%3E%3C/path%3E%3C/svg%3E") no-repeat bottom;
+  background-size: cover;
+}
+
+.gradient-warm {
+  background: linear-gradient(135deg, #ff6b9d 0%, #e63946 50%, #f4a261 100%);
+}
+
+.gradient-cool {
+  background: linear-gradient(135deg, #457b9d 0%, #2a9d8f 100%);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #e63946, #f4a261);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Prose styles */
 .prose h2 {
   font-size: 1.5rem;
   font-weight: 700;
   margin-top: 2rem;
   margin-bottom: 1rem;
-  color: #1e293b;
+  color: #1a1a2e;
 }
 
 .prose p {
@@ -41,4 +76,34 @@ body {
 .prose li {
   margin-bottom: 0.5rem;
   color: #475569;
+}
+
+/* Resource card hover */
+.resource-card {
+  transition: all 0.3s ease;
+}
+
+.resource-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(230, 57, 70, 0.15);
+}
+
+/* CTA button pulse */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(230, 57, 70, 0); }
+}
+
+.cta-pulse {
+  animation: pulse-glow 2s infinite;
+}
+
+/* Floating badge */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.float-badge {
+  animation: float 3s ease-in-out infinite;
 }
