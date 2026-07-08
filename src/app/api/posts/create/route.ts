@@ -47,7 +47,7 @@ export async function POST(request: Request) {
         image_prompt: image_prompt || null,
         category,
         affiliate,
-        status: status || "draft",
+        status: status || "published",
         views: views || 0,
         clicks: clicks || 0,
         pinterest_title,
