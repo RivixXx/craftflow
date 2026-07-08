@@ -136,41 +136,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Categories Grid */}
-      <section className="py-16 px-8 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Browse by Category
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {categories.map((cat) => (
-              <Link
-                key={cat.slug}
-                href={`/category/${cat.slug}`}
-                className="group relative overflow-hidden rounded-3xl p-6 text-center transition-all hover:scale-105"
-              >
-                <div
-                  className={`absolute inset-0 ${cat.bg} opacity-80 group-hover:opacity-100 transition-opacity`}
-                />
-                <div className="relative z-10">
-                  <div
-                    className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${cat.color} text-white mb-4 shadow-lg group-hover:scale-110 transition-transform`}
-                  >
-                    <cat.icon size={32} />
-                  </div>
-                  <h3 className="font-bold text-lg text-gray-800">
-                    {cat.name}
-                  </h3>
-                  <p className="text-sm text-gray-500 mt-1">
-                    {cat.count > 0 ? `${cat.count} resources` : "Coming soon"}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Latest Resources */}
       {posts && posts.length > 0 && (
         <section id="resources" className="py-16 px-8 bg-orange-50/50">
@@ -247,79 +212,6 @@ export default async function Home() {
           </div>
         </section>
       )}
-
-      {/* Popular Categories */}
-      <section className="py-16 px-8 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Popular This Week
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Link
-              href="/category/halloween"
-              className="group relative overflow-hidden rounded-3xl h-64 bg-gradient-to-br from-orange-500 to-red-600 p-8 text-white hover:scale-[1.02] transition-transform"
-            >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-10 -mt-10" />
-              <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-8 -mb-8" />
-              <div className="relative z-10">
-                <span className="text-5xl mb-4 block">🎃</span>
-                <h3 className="text-2xl font-bold mb-2">
-                  Halloween SVG Files
-                </h3>
-                <p className="text-white/80">
-                  Spooky designs for your Cricut projects
-                </p>
-                <span className="inline-flex items-center gap-2 mt-4 font-semibold">
-                  Browse Collection
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                </span>
-              </div>
-            </Link>
-
-            <Link
-              href="/category/christmas"
-              className="group relative overflow-hidden rounded-3xl h-64 bg-gradient-to-br from-green-600 to-red-600 p-8 text-white hover:scale-[1.02] transition-transform"
-            >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-10 -mt-10" />
-              <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-8 -mb-8" />
-              <div className="relative z-10">
-                <span className="text-5xl mb-4 block">🎄</span>
-                <h3 className="text-2xl font-bold mb-2">
-                  Christmas SVG Bundle
-                </h3>
-                <p className="text-white/80">
-                  Festive designs for holiday crafts
-                </p>
-                <span className="inline-flex items-center gap-2 mt-4 font-semibold">
-                  Browse Collection
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                </span>
-              </div>
-            </Link>
-
-            <Link
-              href="/category/wedding-fonts"
-              className="group relative overflow-hidden rounded-3xl h-64 bg-gradient-to-br from-pink-500 to-purple-600 p-8 text-white hover:scale-[1.02] transition-transform"
-            >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-10 -mt-10" />
-              <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-8 -mb-8" />
-              <div className="relative z-10">
-                <span className="text-5xl mb-4 block">💍</span>
-                <h3 className="text-2xl font-bold mb-2">
-                  Wedding Fonts
-                </h3>
-                <p className="text-white/80">
-                  Elegant typography for invitations
-                </p>
-                <span className="inline-flex items-center gap-2 mt-4 font-semibold">
-                  Browse Collection
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                </span>
-              </div>
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* Newsletter CTA */}
       <section className="py-16 px-8 bg-gradient-to-br from-red-500 via-pink-500 to-orange-500">
