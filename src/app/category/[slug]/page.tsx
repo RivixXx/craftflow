@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props) {
   const { data: posts } = await getSupabase()
     .from("posts")
     .select("category")
-    .eq("category", slug)
+    .ilike("category", slug)
     .eq("status", "published")
     .limit(1);
 
@@ -33,7 +33,7 @@ export default async function CategoryPage({ params }: Props) {
   const { data: posts, error } = await getSupabase()
     .from("posts")
     .select("*")
-    .eq("category", slug)
+    .ilike("category", slug)
     .eq("status", "published")
     .order("created_at", { ascending: false });
 

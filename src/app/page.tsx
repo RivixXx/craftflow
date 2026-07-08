@@ -66,8 +66,8 @@ export default async function Home() {
 
   const categoryCounts: Record<string, number> = {};
   for (const row of categoryRows || []) {
-    const cat = row.category;
-    categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+    const cat = row.category?.toLowerCase();
+    if (cat) categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
   }
 
   const categories = categoryMeta.map((c) => ({

@@ -29,13 +29,23 @@ export async function generateMetadata({ params }: Props) {
     .eq("status", "published")
     .single();
 
+  const ogTitle = post?.pinterest_title || post?.title;
+  const ogDesc = post?.pinterest_description || post?.excerpt;
+
   return {
     title: post?.title ? `${post.title} | CraftFlow` : "CraftFlow",
     description: post?.excerpt,
     openGraph: {
-      title: post?.title,
-      description: post?.excerpt,
-      images: post?.image ? [{ url: post.image, width: 1200, height: 630 }] : [],
+      title: ogTitle,
+      description: ogDesc,
+      images: post?.image ? [{ url: post.image, width: 1000, height: 1500 }] : [],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: ogTitle,
+      description: ogDesc,
+      images: post?.image ? [post.image] : [],
     },
   };
 }
@@ -65,7 +75,7 @@ export default async function PostPage({ params }: Props) {
     .from("posts")
     .select("*")
     .eq("status", "published")
-    .eq("category", post.category)
+    .ilike("category", post.category)
     .neq("id", post.id)
     .limit(3);
 
