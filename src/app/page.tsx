@@ -12,14 +12,19 @@ import {
   Heart,
 } from "lucide-react";
 
-const categories = [
+const categoryMeta: {
+  name: string;
+  icon: typeof Scissors;
+  color: string;
+  bg: string;
+  slug: string;
+}[] = [
   {
     name: "SVG Files",
     icon: Scissors,
     color: "from-red-400 to-pink-500",
     bg: "bg-red-50",
     slug: "svg",
-    count: "500+",
   },
   {
     name: "Fonts",
@@ -27,7 +32,6 @@ const categories = [
     color: "from-amber-400 to-orange-500",
     bg: "bg-amber-50",
     slug: "fonts",
-    count: "300+",
   },
   {
     name: "Coloring Pages",
@@ -35,7 +39,6 @@ const categories = [
     color: "from-cyan-400 to-blue-500",
     bg: "bg-cyan-50",
     slug: "coloring-pages",
-    count: "200+",
   },
   {
     name: "Procreate",
@@ -43,7 +46,6 @@ const categories = [
     color: "from-purple-400 to-indigo-500",
     bg: "bg-purple-50",
     slug: "procreate",
-    count: "150+",
   },
 ];
 
@@ -54,6 +56,22 @@ export default async function Home() {
     .eq("status", "published")
     .order("created_at", { ascending: false })
     .limit(6);
+
+  const { data: categoryRows } = await supabase
+    .from("posts")
+    .select("category")
+    .eq("status", "published");
+
+  const categoryCounts: Record<string, number> = {};
+  for (const row of categoryRows || []) {
+    const cat = row.category;
+    categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+  }
+
+  const categories = categoryMeta.map((c) => ({
+    ...c,
+    count: categoryCounts[c.slug] || 0,
+  }));
 
   return (
     <div className="min-h-screen">
@@ -142,7 +160,7 @@ export default async function Home() {
                     {cat.name}
                   </h3>
                   <p className="text-sm text-gray-500 mt-1">
-                    {cat.count} resources
+                    {cat.count > 0 ? `${cat.count} resources` : "Coming soon"}
                   </p>
                 </div>
               </Link>
