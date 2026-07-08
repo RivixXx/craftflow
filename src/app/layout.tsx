@@ -153,19 +153,19 @@ export default function RootLayout({
                 <h4 className="font-bold mb-4">Support</h4>
                 <ul className="space-y-2 text-gray-400 text-sm">
                   <li>
-                    <a href="#" className="hover:text-white transition-colors">
+                    <Link href="/about" className="hover:text-white transition-colors">
                       About Us
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-white transition-colors">
+                    <Link href="/contact" className="hover:text-white transition-colors">
                       Contact
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-white transition-colors">
+                    <Link href="/privacy-policy" className="hover:text-white transition-colors">
                       Privacy Policy
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
