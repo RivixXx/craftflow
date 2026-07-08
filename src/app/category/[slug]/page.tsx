@@ -1,7 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, ArrowLeft } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
+
+export const dynamic = "force-dynamic";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -10,7 +12,7 @@ type Props = {
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
 
-  const { data: posts } = await supabase
+  const { data: posts } = await getSupabase()
     .from("posts")
     .select("category")
     .eq("category", slug)
@@ -28,7 +30,7 @@ export async function generateMetadata({ params }: Props) {
 export default async function CategoryPage({ params }: Props) {
   const { slug } = await params;
 
-  const { data: posts, error } = await supabase
+  const { data: posts, error } = await getSupabase()
     .from("posts")
     .select("*")
     .eq("category", slug)

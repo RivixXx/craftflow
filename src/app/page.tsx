@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
+
+export const dynamic = "force-dynamic";
 import {
   Scissors,
   Sparkles,
@@ -50,14 +52,14 @@ const categoryMeta: {
 ];
 
 export default async function Home() {
-  const { data: posts } = await supabase
+  const { data: posts } = await getSupabase()
     .from("posts")
     .select("*")
     .eq("status", "published")
     .order("created_at", { ascending: false })
     .limit(6);
 
-  const { data: categoryRows } = await supabase
+  const { data: categoryRows } = await getSupabase()
     .from("posts")
     .select("category")
     .eq("status", "published");

@@ -1,4 +1,6 @@
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
+
+export const dynamic = "force-dynamic";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -20,7 +22,7 @@ type Props = {
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
 
-  const { data: post } = await supabase
+  const { data: post } = await getSupabase()
     .from("posts")
     .select("*")
     .eq("slug", slug)
@@ -41,7 +43,7 @@ export async function generateMetadata({ params }: Props) {
 export default async function PostPage({ params }: Props) {
   const { slug } = await params;
 
-  const { data: post, error } = await supabase
+  const { data: post, error } = await getSupabase()
     .from("posts")
     .select("*")
     .eq("slug", slug)
@@ -53,13 +55,13 @@ export default async function PostPage({ params }: Props) {
   }
 
   // Increment views
-  await supabase
+  await getSupabase()
     .from("posts")
     .update({ views: (post.views || 0) + 1 })
     .eq("id", post.id);
 
   // Get related posts
-  const { data: relatedPosts } = await supabase
+  const { data: relatedPosts } = await getSupabase()
     .from("posts")
     .select("*")
     .eq("status", "published")
