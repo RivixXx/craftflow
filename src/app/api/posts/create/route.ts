@@ -1,9 +1,26 @@
 import { NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
+function convertGoogleDriveUrl(url: string): string {
+  if (!url) return url;
+
+  // Match: https://drive.google.com/file/d/FILE_ID/...
+  const fileMatch = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (fileMatch) {
+    return `https://lh3.googleusercontent.com/d/${fileMatch[1]}`;
+  }
+
+  // Match: https://drive.google.com/open?id=FILE_ID
+  const openMatch = url.match(/drive\.google\.com\/open\?id=([a-zA-Z0-9_-]+)/);
+  if (openMatch) {
+    return `https://lh3.googleusercontent.com/d/${openMatch[1]}`;
+  }
+
+  // Already a CDN or other URL — return as-is
+  return url;
+}
 
 export async function POST(request: Request) {
-
   const apiKey = request.headers.get("x-api-key");
 
   if (apiKey !== process.env.CRAFTFLOW_API_KEY) {
@@ -14,9 +31,7 @@ export async function POST(request: Request) {
   }
 
   try {
-
     const body = await request.json();
-
 
     const {
       slug,
@@ -35,7 +50,6 @@ export async function POST(request: Request) {
       pinterest_url
     } = body;
 
-
     const { data, error } = await getSupabaseAdmin()
       .from("posts")
       .insert({
@@ -43,7 +57,7 @@ export async function POST(request: Request) {
         title,
         excerpt,
         content,
-        image,
+        image: convertGoogleDriveUrl(image),
         image_prompt: image_prompt || null,
         category,
         affiliate,
@@ -57,8 +71,6 @@ export async function POST(request: Request) {
       .select()
       .single();
 
-
-
     if (error) {
       return NextResponse.json(
         { error: error.message },
@@ -66,17 +78,12 @@ export async function POST(request: Request) {
       );
     }
 
-
     return NextResponse.json(data);
 
-
   } catch (error) {
-
     return NextResponse.json(
       { error: "Invalid request" },
       { status: 500 }
     );
-
   }
-
 }
