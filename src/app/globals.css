@@ -5,13 +5,6 @@
   --foreground: #1a1a2e;
   --primary: #e63946;
   --primary-hover: #c1121f;
-  --accent: #457b9d;
-  --accent-light: #a8dadc;
-  --warm: #f4a261;
-  --warm-light: #fce4b8;
-  --green: #2a9d8f;
-  --purple: #7b2cbf;
-  --pink: #ff6b9d;
 }
 
 @theme inline {
@@ -23,26 +16,12 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* Craft-style decorative elements */
 .craft-dots {
   background-image: radial-gradient(circle, #e63946 1px, transparent 1px);
   background-size: 20px 20px;
-}
-
-.craft-wave {
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%23f4a261' fill-opacity='0.15' d='M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,53.3C672,43,768,21,864,16C960,11,1056,21,1152,32C1248,43,1344,53,1392,58.7L1440,64L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z'%3E%3C/path%3E%3C/svg%3E") no-repeat bottom;
-  background-size: cover;
-}
-
-.gradient-warm {
-  background: linear-gradient(135deg, #ff6b9d 0%, #e63946 50%, #f4a261 100%);
-}
-
-.gradient-cool {
-  background: linear-gradient(135deg, #457b9d 0%, #2a9d8f 100%);
 }
 
 .text-gradient {
@@ -61,21 +40,99 @@ body {
   color: #1a1a2e;
 }
 
+.prose h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: #1a1a2e;
+}
+
+.prose h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #1a1a2e;
+}
+
 .prose p {
   margin-bottom: 1rem;
   line-height: 1.75;
   color: #475569;
 }
 
-.prose ul {
-  list-style-type: disc;
+.prose strong {
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.prose a {
+  color: #e63946;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose a:hover {
+  color: #c1121f;
+}
+
+.prose ul, .prose ol {
   padding-left: 1.5rem;
   margin-bottom: 1rem;
+}
+
+.prose ul {
+  list-style-type: disc;
+}
+
+.prose ol {
+  list-style-type: decimal;
 }
 
 .prose li {
   margin-bottom: 0.5rem;
   color: #475569;
+  line-height: 1.6;
+}
+
+.prose blockquote {
+  border-left: 4px solid #e63946;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  color: #64748b;
+  font-style: italic;
+}
+
+.prose code {
+  background: #f1f5f9;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  color: #e63946;
+}
+
+.prose img {
+  border-radius: 1rem;
+  margin: 1.5rem 0;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.prose th, .prose td {
+  border: 1px solid #e2e8f0;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.prose th {
+  background: #f8fafc;
+  font-weight: 600;
+  color: #1a1a2e;
 }
 
 /* Resource card hover */

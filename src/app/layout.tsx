@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import Link from "next/link";
-import { Scissors, Heart } from "lucide-react";
+import { Scissors, Heart, Menu, X } from "lucide-react";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -34,6 +34,9 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-sans bg-[#fffbf5]">
         {/* Header */}
         <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-orange-100">
+          {/* Mobile hamburger checkbox - must be sibling of menu */}
+          <input type="checkbox" id="mobile-menu-toggle" className="hidden peer" />
+
           <div className="max-w-6xl mx-auto px-8 h-16 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2">
               <div className="p-2 bg-gradient-to-br from-red-500 to-pink-500 rounded-xl text-white">
@@ -43,40 +46,38 @@ export default function RootLayout({
                 CraftFlow
               </span>
             </Link>
+
+            {/* Desktop nav */}
             <nav className="hidden md:flex items-center gap-6">
-              <Link
-                href="/category/svg"
-                className="text-sm font-medium text-gray-600 hover:text-red-500 transition-colors"
-              >
-                SVG Files
-              </Link>
-              <Link
-                href="/category/fonts"
-                className="text-sm font-medium text-gray-600 hover:text-red-500 transition-colors"
-              >
-                Fonts
-              </Link>
-              <Link
-                href="/category/coloring-pages"
-                className="text-sm font-medium text-gray-600 hover:text-red-500 transition-colors"
-              >
-                Coloring Pages
-              </Link>
-              <Link
-                href="/category/procreate"
-                className="text-sm font-medium text-gray-600 hover:text-red-500 transition-colors"
-              >
-                Procreate
-              </Link>
+              <Link href="/category/svg" className="text-sm font-medium text-gray-600 hover:text-red-500 transition-colors">SVG Files</Link>
+              <Link href="/category/fonts" className="text-sm font-medium text-gray-600 hover:text-red-500 transition-colors">Fonts</Link>
+              <Link href="/category/coloring-pages" className="text-sm font-medium text-gray-600 hover:text-red-500 transition-colors">Coloring Pages</Link>
+              <Link href="/category/procreate" className="text-sm font-medium text-gray-600 hover:text-red-500 transition-colors">Procreate</Link>
             </nav>
-            <a
-              href="https://creativefabrica.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-red-500 to-pink-500 text-white px-5 py-2 rounded-xl font-semibold text-sm hover:from-red-600 hover:to-pink-600 transition-all shadow-md"
-            >
-              Premium Resources
-            </a>
+
+            <div className="flex items-center gap-3">
+              <a
+                href="https://creativefabrica.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-red-500 to-pink-500 text-white px-5 py-2 rounded-xl font-semibold text-sm hover:from-red-600 hover:to-pink-600 transition-all shadow-md"
+              >
+                Premium Resources
+              </a>
+              {/* Hamburger button */}
+              <label htmlFor="mobile-menu-toggle" className="md:hidden cursor-pointer p-2 text-gray-600 hover:text-red-500 transition-colors">
+                <Menu size={24} />
+              </label>
+            </div>
+          </div>
+
+          {/* Mobile dropdown menu */}
+          <div className="hidden peer-checked:flex flex-col gap-1 px-8 pb-4 md:hidden border-t border-orange-100 bg-white">
+            <Link href="/category/svg" className="py-2.5 text-sm font-medium text-gray-600 hover:text-red-500">SVG Files</Link>
+            <Link href="/category/fonts" className="py-2.5 text-sm font-medium text-gray-600 hover:text-red-500">Fonts</Link>
+            <Link href="/category/coloring-pages" className="py-2.5 text-sm font-medium text-gray-600 hover:text-red-500">Coloring Pages</Link>
+            <Link href="/category/procreate" className="py-2.5 text-sm font-medium text-gray-600 hover:text-red-500">Procreate</Link>
+            <a href="https://creativefabrica.com" target="_blank" rel="noopener noreferrer" className="py-2.5 text-sm font-semibold text-red-500">Premium Resources</a>
           </div>
         </header>
 
